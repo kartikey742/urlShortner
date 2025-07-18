@@ -86,6 +86,6 @@ const serverFile=async(filename,type,res)=>{
         })
         }
 })
-server.listen(3000,()=>{console.log('server started');
+server.listen(3000, '0.0.0.0',()=>{console.log('server started');
 })
  
