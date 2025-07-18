@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"><h1>URL Shortner</h1>
+        <p>Enter URL</p>
+        <input type="text" id="url">
+        <p>Enter Short Code</p>
+        <input type="text" id="shrtcd">
+        <br><br>
+        <button id="btn" type="submit">Submit</button>
+            <h2>Shortened URLs</h2>
+            <ul id="ul"></ul>
+    </div>
+    <script>
+        const btn=document.getElementById('btn')
+        btn.addEventListener('click',async()=>{
+            
+            const url=document.getElementById('url').value
+            const shortCode=document.getElementById('shrtcd').value
+            console.log(url);
+            console.log(shortCode);  
+            const fetchShortenedUrl=async()=>{
+            const response=await fetch('/links')
+            const links=await response.json()
+            console.log(links);
+
+              const ul = document.getElementById("ul");
+    ul.innerHTML = "";
+
+    for (const [shortCode, url] of Object.entries(links)) {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="/${shortCode}" target="_blank">${shortCode}</a> - ${url}`;
+        ul.appendChild(li);
+    }
+
+            }
+           try {
+        const response = await fetch('/shorten', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url, shortCode })
+        });
+
+        if (response.ok) {
+            fetchShortenedUrl()
+            alert('Form submitted');
+        } else {
+            const errMsg = await response.text();
+            alert(`Submission failed: ${errMsg}`);
+        }
+    } catch (err) {
+        alert('Network or server error');
+        console.error(err);
+    }
+        })
+    </script>
+</body>
+</html>

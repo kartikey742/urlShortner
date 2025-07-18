@@ -1,0 +1,10 @@
+ #box {
+      width: 30%;
+      margin: 50px auto;
+      text-align: center;
+      border: 1px solid #ccc;
+      padding: 30px;
+      border-radius: 20px; /* Rounded corners */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      background-color: #ffffff;
+    }
