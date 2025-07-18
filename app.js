@@ -2,6 +2,8 @@ const fs=require('fs')
 const path=require('path')
 const crypto=require('crypto')
 const {createServer}=require('http')
+const dotenv = require('dotenv');
+dotenv.config();
 // const filename=path.join(__dirname,'index.html')
 const DATA_FILE=path.join(__dirname,'data','links.json')
 const serverFile=async(filename,type,res)=>{    
@@ -86,7 +88,7 @@ const serverFile=async(filename,type,res)=>{
         })
         }
 })
-const PORT =  3000;
+const PORT =  process.env.PORT;
 server.listen(PORT, '0.0.0.0',()=>{console.log('server started');
 })
  
